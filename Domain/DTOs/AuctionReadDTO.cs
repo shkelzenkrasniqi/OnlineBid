@@ -1,13 +1,14 @@
-﻿using Domain.Enums;
+﻿using Domain.Entities;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Domain.DTOs
 {
-    public class Auction
+    public class AuctionReadDTO
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -18,8 +19,6 @@ namespace Domain.Entities
         public decimal? CurrentPrice { get; set; }
         public bool IsActive { get; set; }
         public Guid UserId { get; set; }
-        public ApplicationUser User { get; set; }
-        public Category Category { get; set; } 
-        public ICollection<Bid> Bids { get; set; } 
+        public Category Category { get; set; }
     }
 }

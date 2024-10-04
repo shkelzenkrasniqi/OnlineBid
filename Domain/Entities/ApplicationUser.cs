@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities
 {
-    internal class ApplicationUser
+    public class ApplicationUser: IdentityUser<Guid>
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public ICollection<Bid> Bids { get; set; } 
+        public ICollection<Auction> Auctions { get; set; }
     }
 }
