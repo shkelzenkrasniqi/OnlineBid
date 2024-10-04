@@ -14,7 +14,8 @@ namespace Application.Configuration
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IAuctionService, AuctionService>();
-            
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IAccountService, AccountService>();
         }
     }
 }

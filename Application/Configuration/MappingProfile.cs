@@ -16,6 +16,7 @@ namespace Application.Configuration
             CreateMap<Auction, AuctionReadDTO>();
             CreateMap<AuctionCreateDTO, Auction>();
             CreateMap<AuctionUpdateDTO, Auction>();
+            CreateMap<ApplicationUser, UserDTO>().ReverseMap();
         }
     }
 }

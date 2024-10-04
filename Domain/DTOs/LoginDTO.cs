@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Enums
+namespace Domain.DTOs
 {
-    public enum Category
+    public class LoginDTO
     {
-        Cars,
-        Antique,
-        Property
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
