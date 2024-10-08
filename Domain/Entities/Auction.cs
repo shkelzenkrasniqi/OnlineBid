@@ -16,7 +16,7 @@ namespace Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public decimal? CurrentPrice { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive => DateTime.Now >= StartDate && DateTime.Now <= EndDate;
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
         public Category Category { get; set; } 
