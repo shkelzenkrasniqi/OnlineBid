@@ -10,16 +10,10 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class BidService : IBidService
+    public class BidService(IBidRepository bidRepository, IMapper mapper,IAuctionRepository auctionRepository) : IBidService
     {
-        private readonly IBidRepository _bidRepository;
-        private readonly IMapper _mapper;
-
-        public BidService(IBidRepository bidRepository, IMapper mapper)
-        {
-            _bidRepository = bidRepository;
-            _mapper = mapper;
-        }
+        private readonly IBidRepository _bidRepository = bidRepository;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<IEnumerable<BidReadDTO>> GetAllBidsAsync()
         {
@@ -35,6 +29,25 @@ namespace Application.Services
 
         public async Task<BidReadDTO> CreateBidAsync(BidCreateDTO bidCreateDTO)
         {
+            var auction = await auctionRepository.GetByIdAsync(bidCreateDTO.AuctionId);
+
+            if (auction == null)
+            {
+                throw new Exception("Auction not found.");
+            }
+
+            if (!auction.IsActive)
+            {
+                throw new Exception("Cannot place a bid. The auction is not active.");
+            }
+
+            if (bidCreateDTO.Amount < auction.CurrentPrice)
+            {
+                throw new Exception("Cannot place a bid lower than its current price");
+            }
+            auction.CurrentPrice = bidCreateDTO.Amount;
+            await auctionRepository.UpdateAsync(auction);
+
             var bid = _mapper.Map<Bid>(bidCreateDTO);
             await _bidRepository.AddAsync(bid);
             return _mapper.Map<BidReadDTO>(bid);
