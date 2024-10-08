@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineBid.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AccountController(IAccountService _accountService) : ControllerBase
     {
         [HttpPost("login")]

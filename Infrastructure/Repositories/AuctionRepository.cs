@@ -18,7 +18,9 @@ namespace Infrastructure.Repositories
 
         public async Task<Auction> GetByIdAsync(Guid id)
         {
-            return await _context.Auctions.FindAsync(id);
+            return await _context.Auctions
+                .Include(a => a.Bids)  
+                .FirstOrDefaultAsync(a => a.Id == id);
         }
         public async Task AddAsync(Auction auction)
         {

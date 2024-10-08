@@ -13,7 +13,8 @@ namespace Infrastructure.Configuration
         public static void Configure(IServiceCollection services)
         {
             services.AddScoped<IAuctionRepository, AuctionRepository>();
-            
+            services.AddScoped<IBidRepository, BidRepository>();
+
         }
     }
 }

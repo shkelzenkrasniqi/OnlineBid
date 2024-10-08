@@ -16,6 +16,8 @@ namespace Application.Configuration
             services.AddScoped<IAuctionService, AuctionService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IBidService, BidService>();
+
         }
     }
 }
