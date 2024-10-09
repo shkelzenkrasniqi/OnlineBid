@@ -26,7 +26,12 @@ namespace OnlineBid.Controllers
             var bids = await _bidService.GetAllBidsAsync();
             return Ok(bids);
         }
-
+        [HttpGet("{auctionId}/bids")]
+        public async Task<ActionResult<IEnumerable<BidReadDTO>>> GetBidsForAuction(Guid auctionId)
+        {
+            var bids = await _bidService.GetAllBidsForAuctionAsync(auctionId);
+            return Ok(bids);
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<BidReadDTO>> GetBidById(Guid id)
         {
@@ -42,7 +47,7 @@ namespace OnlineBid.Controllers
 
             var bid = await _bidService.CreateBidAsync(bidCreateDTO);
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNewBid", bid.AuctionId, bid.UserId, bid.Amount);
+            await _hubContext.Clients.All.SendAsync("ReceiveNewBid", bid.Amount, bid.BidTime, bid.UserId,bid.AuctionId );
 
             return CreatedAtAction(nameof(GetBidById), new { id = bid.Id }, bid);
         }

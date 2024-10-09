@@ -4,9 +4,9 @@ namespace OnlineBid.Extensions
 {
     public class BidHub : Hub
     {
-        public async Task BroadcastNewBid(string auctionId, string userId, decimal Amount)
+        public async Task BroadcastNewBid(decimal amount,DateTime bidTime, string userId,string auctionId)
         {
-            await Clients.All.SendAsync("ReceiveNewBid", auctionId, userId, Amount);
+            await Clients.All.SendAsync("ReceiveNewBid",amount,bidTime, userId,auctionId );
         }
     }
 }

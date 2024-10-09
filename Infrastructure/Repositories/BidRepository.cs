@@ -39,5 +39,10 @@ namespace Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<IEnumerable<Bid>> GetAllForAuctionAsync(Guid auctionId)
+        {
+            return await _context.Bids.Where(b => b.AuctionId == auctionId)
+                                      .ToListAsync();
+        }
     }
 }

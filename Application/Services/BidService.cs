@@ -61,5 +61,14 @@ namespace Application.Services
             await _bidRepository.DeleteAsync(id);
             return true;
         }
+
+        public async Task<IEnumerable<BidReadDTO>> GetAllBidsForAuctionAsync(Guid auctionId)
+        {
+            var bids = await _bidRepository.GetAllForAuctionAsync(auctionId);
+
+            var bidReadDTOs = _mapper.Map<IEnumerable<BidReadDTO>>(bids);
+
+            return bidReadDTOs;
+        }
     }
 }

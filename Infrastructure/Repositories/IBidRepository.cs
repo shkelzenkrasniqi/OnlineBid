@@ -9,6 +9,7 @@ namespace Infrastructure.Repositories
 {
     public interface IBidRepository
     {
+        Task<IEnumerable<Bid>> GetAllForAuctionAsync(Guid auctionId);
         Task<IEnumerable<Bid>> GetAllAsync();
         Task<Bid> GetByIdAsync(Guid id);
         Task AddAsync(Bid bid);
