@@ -20,5 +20,7 @@ namespace Domain.DTOs
         public bool IsActive { get; set; }
         public Guid UserId { get; set; }
         public Category Category { get; set; }
+        public List<AuctionPhotoDTO> Photos { get; set; }
+
     }
 }

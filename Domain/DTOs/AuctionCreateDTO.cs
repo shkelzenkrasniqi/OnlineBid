@@ -18,5 +18,7 @@ namespace Domain.DTOs
         public DateTime EndDate { get; set; }
         public Guid UserId { get; set; }
         public Category Category { get; set; }
+        //public List<AuctionPhotoDTO> Photos { get; set; }
+
     }
 }

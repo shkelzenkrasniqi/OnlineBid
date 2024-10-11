@@ -39,12 +39,12 @@ namespace OnlineBid.Controllers
 
         // POST: api/auctions
         [HttpPost]
-        public async Task<ActionResult<AuctionReadDTO>> CreateAuction(AuctionCreateDTO auctionCreateDTO)
+        public async Task<ActionResult<AuctionReadDTO>> CreateAuction([FromForm] AuctionCreateDTO auctionCreateDTO, [FromForm] List<IFormFile> photos)
         {
-            var auction = await _auctionService.CreateAuctionAsync(auctionCreateDTO);
+            var auction = await _auctionService.CreateAuctionAsync(auctionCreateDTO, photos);
             return CreatedAtAction(nameof(GetAuctionById), new { id = auction.Id }, auction);
         }
-
+     
         // PUT: api/auctions/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAuction(Guid id, AuctionUpdateDTO auctionUpdateDTO)

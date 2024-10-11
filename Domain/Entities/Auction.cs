@@ -20,6 +20,8 @@ namespace Domain.Entities
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
         public Category Category { get; set; } 
-        public ICollection<Bid> Bids { get; set; } 
+        public ICollection<Bid> Bids { get; set; }
+        public List<AuctionPhoto> Photos { get; set; }
+
     }
 }

@@ -13,13 +13,14 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Auction>> GetAllAsync()
         {
-            return await _context.Auctions.ToListAsync();
+            return await _context.Auctions.Include(c => c.Photos).ToListAsync();
         }
 
         public async Task<Auction> GetByIdAsync(Guid id)
         {
             return await _context.Auctions
-                .Include(a => a.Bids)  
+                .Include(a => a.Bids)
+                .Include(c => c.Photos)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
         public async Task AddAsync(Auction auction)

@@ -2,6 +2,7 @@
 using Domain.DTOs;
 using Domain.Entities;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,11 @@ namespace Application.Services
             return _mapper.Map<AuctionReadDTO>(auction);
         }
 
-        public async Task<AuctionReadDTO> CreateAuctionAsync(AuctionCreateDTO AuctionCreateDTO)
+        public async Task<AuctionReadDTO> CreateAuctionAsync(AuctionCreateDTO AuctionCreateDTO, List<IFormFile> photos)
         {
             var auction = _mapper.Map<Auction>(AuctionCreateDTO);
+            await AddPhotosToAuctionAsync(auction, photos);
+
             await _auctionRepository.AddAsync(auction);
             return _mapper.Map<AuctionReadDTO>(auction);
         }
@@ -51,6 +54,26 @@ namespace Application.Services
 
             await _auctionRepository.DeleteAsync(id);
             return true;
+        }
+        private async Task AddPhotosToAuctionAsync(Auction auction, List<IFormFile> photos)
+        {
+            if (photos != null && photos.Count > 0)
+            {
+                auction.Photos = new List<AuctionPhoto>();
+
+                foreach (var photo in photos)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await photo.CopyToAsync(memoryStream);
+                        auction.Photos.Add(new AuctionPhoto
+                        {
+                            PhotoData = memoryStream.ToArray(),
+                            ContentType = photo.ContentType
+                        });
+                    }
+                }
+            }
         }
     }
 }
