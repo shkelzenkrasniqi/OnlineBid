@@ -14,5 +14,6 @@ namespace Domain.DTOs
         public DateTime BidTime { get; set; }
         public Guid UserId { get; set; }
         public Guid AuctionId { get; set; }
+        public string UserName { get; set; }
     }
 }

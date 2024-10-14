@@ -17,7 +17,8 @@ namespace Application.Configuration
             CreateMap<AuctionCreateDTO, Auction>();
             CreateMap<AuctionUpdateDTO, Auction>();
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
-            CreateMap<Bid, BidReadDTO>();
+            CreateMap<Bid, BidReadDTO>()
+             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
             CreateMap<BidCreateDTO, Bid>();
             CreateMap<AuctionPhoto, AuctionPhotoDTO>().ReverseMap();
 

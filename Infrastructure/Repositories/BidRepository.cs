@@ -42,6 +42,7 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Bid>> GetAllForAuctionAsync(Guid auctionId)
         {
             return await _context.Bids.Where(b => b.AuctionId == auctionId)
+                                      .Include(b => b.User)
                                       .ToListAsync();
         }
     }
