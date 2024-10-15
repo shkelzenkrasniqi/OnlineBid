@@ -40,10 +40,11 @@ namespace Application.Services
             {
                 throw new Exception("Cannot place a bid. The auction is not active.");
             }
+            decimal minimumBid = auction.CurrentPrice ?? auction.StartingPrice;
 
-            if (bidCreateDTO.Amount < auction.CurrentPrice)
+            if (bidCreateDTO.Amount <= minimumBid)
             {
-                throw new Exception("Cannot place a bid lower than its current price");
+                throw new Exception("Cannot place a bid lower than or equal to the minimum price.");
             }
             auction.CurrentPrice = bidCreateDTO.Amount;
             await auctionRepository.UpdateAsync(auction);
