@@ -27,7 +27,6 @@ namespace Application.Services
             var auction = await _auctionRepository.GetByIdAsync(id);
             return _mapper.Map<AuctionReadDTO>(auction);
         }
-
         public async Task<AuctionReadDTO> CreateAuctionAsync(AuctionCreateDTO AuctionCreateDTO, List<IFormFile> photos)
         {
             var auction = _mapper.Map<Auction>(AuctionCreateDTO);

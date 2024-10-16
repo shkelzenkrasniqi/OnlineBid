@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Infrastructure;
 using Domain.Entities;
+using OnlineBid.Extensions;
 
 namespace API.Extensions
 {
@@ -69,6 +70,7 @@ namespace API.Extensions
                         ValidateAudience = false,
                     };
                 });
+            services.AddTransient<RoleSeeder>();
             services.AddAuthorization();
             return services;
         }

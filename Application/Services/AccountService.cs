@@ -56,6 +56,16 @@ namespace Application.Services
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (result.Succeeded)
             {
+                var isFirstUser = !_userManager.Users.Any();  
+
+                if (isFirstUser)
+                {
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, "User"); 
+                }
                 var userDto = _mapper.Map<UserDTO>(user);
                 userDto.Token = await _tokenService.CreateToken(user);
                 return userDto;

@@ -19,6 +19,7 @@ builder.Services.AddSignalR();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentityServiceJWT(builder.Configuration);
+builder.Services.AddTransient<RoleSeeder>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -35,7 +36,19 @@ builder.Services.AddCors(options =>
     });
 });
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var roleSeeder = services.GetRequiredService<RoleSeeder>();
+        await roleSeeder.SeedRolesAsync(); 
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred while seeding roles: {ex.Message}");
+    }
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

@@ -1,5 +1,6 @@
 ﻿using Application.Services;
 using Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace OnlineBid.Controllers
 
             return Ok(auction);
         }
-
+       
         // POST: api/auctions
         [HttpPost]
         public async Task<ActionResult<AuctionReadDTO>> CreateAuction([FromForm] AuctionCreateDTO auctionCreateDTO, [FromForm] List<IFormFile> photos)
