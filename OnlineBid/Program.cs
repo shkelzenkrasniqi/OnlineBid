@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-//builder.Services.AddFluentValidationAutoValidation();
 
 RepositoriesDIConfiguration.Configure(builder.Services);
 ServicesDIConfiguration.Configure(builder.Services, builder.Configuration);
