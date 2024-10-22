@@ -1,5 +1,4 @@
-﻿using Domain.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +15,6 @@ namespace Domain.DTOs
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Guid UserId { get; set; }
-        public Category Category { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

@@ -16,8 +16,7 @@ namespace Infrastructure
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<Bid> Bids { get; set; }
         public DbSet<AuctionPhoto> AuctionPhotos { get; set; }
-
-        //public DbSet<AuctionWinner> AuctionWinners { get; set; } 
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

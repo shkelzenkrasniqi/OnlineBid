@@ -6,22 +6,11 @@ namespace OnlineBid.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    public class AccountController(IAccountService _accountService) : ControllerBase
     {
-        private readonly IAccountService _accountService;
-
-        public AccountController(IAccountService accountService)
-        {
-            _accountService = accountService;
-        }
-
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
+        public async Task<IActionResult> Login(LoginDTO loginDto)
         {
-            // Check if model state is valid
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState); // Return validation errors automatically
-
             var user = await _accountService.Login(loginDto);
             if (user != null)
                 return Ok(user);
@@ -30,12 +19,8 @@ namespace OnlineBid.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDto)
+        public async Task<IActionResult> Register(RegisterDTO registerDto)
         {
-            // Check if model state is valid
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState); // Return validation errors automatically
-
             try
             {
                 var user = await _accountService.Register(registerDto);

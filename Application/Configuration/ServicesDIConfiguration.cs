@@ -20,6 +20,7 @@ namespace Application.Configuration
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBidService, BidService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddScoped<IValidator<LoginDTO>, LoginValidator>();
             services.AddScoped<IValidator<RegisterDTO>, RegisterValidator>();

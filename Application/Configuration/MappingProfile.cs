@@ -21,6 +21,7 @@ namespace Application.Configuration
              .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
             CreateMap<BidCreateDTO, Bid>();
             CreateMap<AuctionPhoto, AuctionPhotoDTO>().ReverseMap();
+            CreateMap<CategoryDTO, Category>().ReverseMap();
 
         }
     }

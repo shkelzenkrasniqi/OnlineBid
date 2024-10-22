@@ -14,7 +14,7 @@ namespace Infrastructure.Configuration
         {
             services.AddScoped<IAuctionRepository, AuctionRepository>();
             services.AddScoped<IBidRepository, BidRepository>();
-
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
     }
 }

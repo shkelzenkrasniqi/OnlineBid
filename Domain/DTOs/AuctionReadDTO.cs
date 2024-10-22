@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +18,7 @@ namespace Domain.DTOs
         public decimal? CurrentPrice { get; set; }
         public bool IsActive { get; set; }
         public Guid UserId { get; set; }
-        public Category Category { get; set; }
+        public Guid CategoryId { get; set; }
         public List<AuctionPhotoDTO> Photos { get; set; }
 
     }

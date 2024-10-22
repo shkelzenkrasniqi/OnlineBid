@@ -1,5 +1,4 @@
-﻿using Domain.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +18,7 @@ namespace Domain.Entities
         public bool IsActive => DateTime.Now >= StartDate && DateTime.Now <= EndDate;
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
+        public Guid CategoryId { get; set; }
         public Category Category { get; set; } 
         public ICollection<Bid> Bids { get; set; }
         public List<AuctionPhoto> Photos { get; set; }

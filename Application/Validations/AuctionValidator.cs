@@ -34,7 +34,7 @@ namespace Application.Validations
                     .NotEmpty().WithMessage("User ID is required")
                     .NotEqual(Guid.Empty).WithMessage("User ID is invalid");
 
-            RuleFor(x => x.Category)
+            RuleFor(x => x.CategoryId)
                     .NotNull().WithMessage("Category cannot be null");
         }
 

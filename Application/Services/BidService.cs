@@ -67,7 +67,9 @@ namespace Application.Services
         {
             var bids = await _bidRepository.GetAllForAuctionAsync(auctionId);
 
-            var bidReadDTOs = _mapper.Map<IEnumerable<BidReadDTO>>(bids);
+            var reversedBids = bids.Reverse();
+
+            var bidReadDTOs = _mapper.Map<IEnumerable<BidReadDTO>>(reversedBids);
 
             return bidReadDTOs;
         }
