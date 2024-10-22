@@ -21,6 +21,7 @@ namespace Infrastructure.Repositories
             return await _context.Auctions
                 .Include(a => a.Bids)
                 .Include(c => c.Photos)
+                .Include(a => a.Category)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
         public async Task AddAsync(Auction auction)

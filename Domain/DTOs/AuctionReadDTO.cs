@@ -18,7 +18,7 @@ namespace Domain.DTOs
         public decimal? CurrentPrice { get; set; }
         public bool IsActive { get; set; }
         public Guid UserId { get; set; }
-        public Guid CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public List<AuctionPhotoDTO> Photos { get; set; }
 
     }

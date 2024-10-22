@@ -13,7 +13,8 @@ namespace Application.Configuration
     {
         public MappingProfile()
         {
-            CreateMap<Auction, AuctionReadDTO>();
+            CreateMap<Auction, AuctionReadDTO>()
+             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
             CreateMap<AuctionCreateDTO, Auction>();
             CreateMap<AuctionUpdateDTO, Auction>();
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
