@@ -3,18 +3,11 @@ using Domain.DTOs;
 using Domain.Entities;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class AuctionService(IAuctionRepository auctionRepository, IMapper mapper) : IAuctionService
+    public class AuctionService(IAuctionRepository _auctionRepository, IMapper _mapper) : IAuctionService
     {
-        private readonly IAuctionRepository _auctionRepository = auctionRepository;
-        private readonly IMapper _mapper = mapper;
         public async Task<IEnumerable<AuctionReadDTO>> SearchAuctionsAsync(string searchTerm)
         {
             var auctions = await _auctionRepository.SearchAuctionsAsync(searchTerm);

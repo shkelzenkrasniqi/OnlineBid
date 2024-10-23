@@ -1,22 +1,14 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-
     internal sealed class CategoryRepository(ApplicationDbContext _context) : ICategoryRepository
     {
-
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _context.Categories.ToListAsync();
         }
-
         public async Task<Category> GetByIdAsync(Guid id)
         {
             return await _context.Categories.FirstOrDefaultAsync(a => a.Id == id);

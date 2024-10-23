@@ -1,35 +1,24 @@
 ﻿using Application.Services;
 using Domain.DTOs;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OnlineBid.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuctionsController : ControllerBase
+    public class AuctionsController(IAuctionService auctionService) : ControllerBase
     {
-        private readonly IAuctionService _auctionService;
-
-        public AuctionsController(IAuctionService auctionService)
-        {
-            _auctionService = auctionService;
-        }
-
         [HttpGet("search")]
         public async Task<IActionResult> SearchAuctions([FromQuery] string searchTerm)
         {
-            var auctions = await _auctionService.SearchAuctionsAsync(searchTerm);
+            var auctions = await auctionService.SearchAuctionsAsync(searchTerm);
             return Ok(auctions);
         }
         // GET: api/auctions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AuctionReadDTO>>> GetAllAuctions()
         {
-            var auctions = await _auctionService.GetAllAuctionsAsync();
+            var auctions = await auctionService.GetAllAuctionsAsync();
             return Ok(auctions);
         }
 
@@ -37,7 +26,7 @@ namespace OnlineBid.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AuctionReadDTO>> GetAuctionById(Guid id)
         {
-            var auction = await _auctionService.GetAuctionByIdAsync(id);
+            var auction = await auctionService.GetAuctionByIdAsync(id);
             if (auction == null)
                 return NotFound();
 
@@ -48,7 +37,7 @@ namespace OnlineBid.Controllers
         [HttpPost]
         public async Task<ActionResult<AuctionReadDTO>> CreateAuction([FromForm] AuctionCreateDTO auctionCreateDTO, [FromForm] List<IFormFile> photos)
         {
-            var auction = await _auctionService.CreateAuctionAsync(auctionCreateDTO, photos);
+            var auction = await auctionService.CreateAuctionAsync(auctionCreateDTO, photos);
             return CreatedAtAction(nameof(GetAuctionById), new { id = auction.Id }, auction);
         }
      
@@ -56,7 +45,7 @@ namespace OnlineBid.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAuction(Guid id, AuctionUpdateDTO auctionUpdateDTO)
         {
-            var updated = await _auctionService.UpdateAuctionAsync(id, auctionUpdateDTO);
+            var updated = await auctionService.UpdateAuctionAsync(id, auctionUpdateDTO);
             if (!updated)
                 return NotFound();
 
@@ -67,7 +56,7 @@ namespace OnlineBid.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAuction(Guid id)
         {
-            var deleted = await _auctionService.DeleteAuctionAsync(id);
+            var deleted = await auctionService.DeleteAuctionAsync(id);
             if (!deleted)
                 return NotFound();
 

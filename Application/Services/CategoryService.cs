@@ -2,20 +2,11 @@
 using Domain.DTOs;
 using Domain.Entities;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class CategoryService(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryService
+    public class CategoryService(ICategoryRepository _categoryRepository, IMapper _mapper) : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository = categoryRepository;
-        private readonly IMapper _mapper = mapper;
-
         public async Task<IEnumerable<CategoryDTO>> GetAllCategorysAsync()
         {
             var categorys = await _categoryRepository.GetAllAsync();

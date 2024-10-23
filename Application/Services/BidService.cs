@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class BidService(IBidRepository bidRepository, IMapper mapper,IAuctionRepository auctionRepository) : IBidService
+    public class BidService(IBidRepository _bidRepository, IMapper _mapper,IAuctionRepository auctionRepository) : IBidService
     {
-        private readonly IBidRepository _bidRepository = bidRepository;
-        private readonly IMapper _mapper = mapper;
-
         public async Task<IEnumerable<BidReadDTO>> GetAllBidsAsync()
         {
             var bids = await _bidRepository.GetAllAsync();

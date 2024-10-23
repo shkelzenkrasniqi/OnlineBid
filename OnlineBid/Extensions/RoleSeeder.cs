@@ -1,9 +1,7 @@
-﻿namespace OnlineBid.Extensions
-{
-    using Microsoft.AspNetCore.Identity;
-    using System;
-    using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 
+  namespace OnlineBid.Extensions
+  {
     public class RoleSeeder
     {
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;

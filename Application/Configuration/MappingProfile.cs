@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using Domain.DTOs;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Configuration
 {
@@ -23,7 +18,6 @@ namespace Application.Configuration
             CreateMap<BidCreateDTO, Bid>();
             CreateMap<AuctionPhoto, AuctionPhotoDTO>().ReverseMap();
             CreateMap<CategoryDTO, Category>().ReverseMap();
-
         }
     }
 }

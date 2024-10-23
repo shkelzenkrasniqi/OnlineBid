@@ -6,15 +6,8 @@ namespace OnlineBid.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoryController(ICategoryService _categoryService) : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
-
-        public CategoryController(ICategoryService categoryService)
-        {
-            _categoryService = categoryService;
-        }
-
         // GET: api/categorys
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetAllCategories()

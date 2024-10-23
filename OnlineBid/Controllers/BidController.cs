@@ -3,23 +3,13 @@ using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using OnlineBid.Extensions;
-using System.Web.Http.ModelBinding;
 
 namespace OnlineBid.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BidController : ControllerBase
+    public class BidController(IBidService _bidService, IHubContext<BidHub> _hubContext) : ControllerBase
     {
-        private readonly IBidService _bidService;
-        private readonly IHubContext<BidHub> _hubContext;
-
-        public BidController(IBidService bidService, IHubContext<BidHub> hubContext)
-        {
-            _bidService = bidService;
-            _hubContext = hubContext;
-        }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BidReadDTO>>> GetAllBids()
         {
