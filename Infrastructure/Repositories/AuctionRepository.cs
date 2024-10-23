@@ -10,6 +10,17 @@ namespace Infrastructure.Repositories
 {
     internal sealed class AuctionRepository(ApplicationDbContext _context) : IAuctionRepository
     {
+        public async Task<IEnumerable<Auction>> SearchAuctionsAsync(string searchTerm)
+        {
+            var query = _context.Auctions.Include(c => c.Photos).Include(a => a.Category).AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(a => a.Title.Contains(searchTerm) || a.Description.Contains(searchTerm));
+            }
+
+            return await query.ToListAsync();
+        }
 
         public async Task<IEnumerable<Auction>> GetAllAsync()
         {

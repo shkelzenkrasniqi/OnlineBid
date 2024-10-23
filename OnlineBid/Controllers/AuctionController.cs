@@ -19,6 +19,12 @@ namespace OnlineBid.Controllers
             _auctionService = auctionService;
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchAuctions([FromQuery] string searchTerm)
+        {
+            var auctions = await _auctionService.SearchAuctionsAsync(searchTerm);
+            return Ok(auctions);
+        }
         // GET: api/auctions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AuctionReadDTO>>> GetAllAuctions()

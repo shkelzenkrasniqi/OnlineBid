@@ -15,7 +15,11 @@ namespace Application.Services
     {
         private readonly IAuctionRepository _auctionRepository = auctionRepository;
         private readonly IMapper _mapper = mapper;
-
+        public async Task<IEnumerable<AuctionReadDTO>> SearchAuctionsAsync(string searchTerm)
+        {
+            var auctions = await _auctionRepository.SearchAuctionsAsync(searchTerm);
+            return _mapper.Map<IEnumerable<AuctionReadDTO>>(auctions);
+        }
         public async Task<IEnumerable<AuctionReadDTO>> GetAllAuctionsAsync()
         {
             var auctions = await _auctionRepository.GetAllAsync();
